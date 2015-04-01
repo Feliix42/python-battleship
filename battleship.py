@@ -1,8 +1,6 @@
 ''' TODO:
-* Stop punish the player for his dumbness
-  (no punishment for guessing wrong coordinates)
 * Play with more ships (costumizable number?)
-  -> work with the inv_board
+  -> different sizes?
 '''
 
 # Import randint function
@@ -10,8 +8,11 @@ from random import randint
 
 # Definitions
 def print_board(board):
-    for row in board:
-        print(" ".join(row))
+    print("\n        1 2 3 4 5")
+    print("      +----------")
+    for row in range(len(board)):
+        print("     " + str(row + 1) + "| " + " ".join(board[row]))
+    print()
 
 def random_row(board):
     return randint(0, len(board) - 1)
@@ -32,16 +33,13 @@ ship_row = random_row(board)
 ship_col = random_col(board)
 inv_board[ship_row][ship_col] = "S"
 
-print("Let's play Battleship!")
-print_board(board)
-print(ship_row + 1)             # TODO - Debug only!
-print(ship_col + 1)             # TODO - Debug only!
-print_board(inv_board)      # TODO - Debug only!
 
+print("\n             * Let's play Battleship! *")
+print_board(board)
 
 turn = 0
 for turn in range(4):
-    print("Turn: ", turn + 1)
+    print("           =========== Turn: %s =========== \n" % str(turn + 1))
 
     while True:
         guess_row = int(input("Guess a Row: ")) - 1
@@ -63,3 +61,6 @@ for turn in range(4):
         if turn == 3:
             print("Game Over")
     print_board(board)
+
+print("Let me show you my fleet:",)
+print_board(inv_board)
