@@ -34,28 +34,31 @@ inv_board[ship_row][ship_col] = "S"
 
 print("Let's play Battleship!")
 print_board(board)
-print(ship_row)             # TODO - Debug only!
-print(ship_col)             # TODO - Debug only!
+print(ship_row + 1)             # TODO - Debug only!
+print(ship_col + 1)             # TODO - Debug only!
 print_board(inv_board)      # TODO - Debug only!
 
 
 turn = 0
 for turn in range(4):
     print("Turn: ", turn + 1)
-    guess_row = int(input("Guess a Row: "))
-    guess_col = int(input("Guess a Column: "))
+
+    while True:
+        guess_row = int(input("Guess a Row: ")) - 1
+        guess_col = int(input("Guess a Column: ")) - 1
+        if guess_row in range(5) and guess_col in range(5) and board[guess_row][guess_col] == "O":
+            break
+        elif (guess_row < 0 or guess_row > 4) or (guess_col < 0 or  guess_col > 4):
+            print("You picked coordinates outside the ocean! Try again!")
+        else:
+            print("You guessed that one already, captain!")
 
     if inv_board[guess_row][guess_col] == "S":
         print("Congratulations! You sunk my battleship!")
         break
     else:
-        if (guess_row < 0 or guess_row > 4) or (guess_col < 0 or  guess_col > 4):
-            print("Oops, that's not even in the ocean.")
-        elif(board[guess_row][guess_col] == "X"):
-            print("You guessed that one already.")
-        else:
-            print("You missed my battleship!")
-            board[guess_row][guess_col] = "X"
+        print("You missed my battleship!")
+        board[guess_row][guess_col] = "X"
 
         if turn == 3:
             print("Game Over")
