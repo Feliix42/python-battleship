@@ -1,13 +1,14 @@
+''' TODO:
+* Stop punish the player for his dumbness
+  (no punishment for guessing wrong coordinates)
+* Play with more ships (costumizable number?)
+  -> work with the inv_board
+'''
+
 # Import randint function
 from random import randint
 
-# initialize boards
-board = []
-inv_board = []
-
-for x in range(5):
-    board.append(["O"] * 5)
-
+# Definitions
 def print_board(board):
     for row in board:
         print(" ".join(row))
@@ -18,22 +19,33 @@ def random_row(board):
 def random_col(board):
     return randint(0, len(board[0]) - 1)
 
-print("Let's play Battleship!")
-print_board(board)
+
+# initialize boards
+board = []
+inv_board = []
+
+for x in range(5):
+    board.append(["O"] * 5)
+    inv_board.append(["O"] * 5)
 
 ship_row = random_row(board)
 ship_col = random_col(board)
-print(ship_row)
-print(ship_col)
+inv_board[ship_row][ship_col] = "S"
+
+print("Let's play Battleship!")
+print_board(board)
+print(ship_row)             # TODO - Debug only!
+print(ship_col)             # TODO - Debug only!
+print_board(inv_board)      # TODO - Debug only!
 
 
 turn = 0
 for turn in range(4):
     print("Turn: ", turn + 1)
-    guess_row = int(input("Guess Row:"))
-    guess_col = int(input("Guess Col:"))
+    guess_row = int(input("Guess a Row: "))
+    guess_col = int(input("Guess a Column: "))
 
-    if guess_row == ship_row and guess_col == ship_col:
+    if inv_board[guess_row][guess_col] == "S":
         print("Congratulations! You sunk my battleship!")
         break
     else:
