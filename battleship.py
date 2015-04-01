@@ -20,6 +20,13 @@ def random_row(board):
 def random_col(board):
     return randint(0, len(board[0]) - 1)
 
+max_turns = 15      # number of turns
+
+def generate_ships(board1, board2):
+    ships = 5
+    ship_row = random_row(board)
+    ship_col = random_col(board)
+    inv_board[ship_row][ship_col] = "S"
 
 # initialize boards
 board = []
@@ -29,16 +36,14 @@ for x in range(5):
     board.append(["O"] * 5)
     inv_board.append([" "] * 5)
 
-ship_row = random_row(board)
-ship_col = random_col(board)
-inv_board[ship_row][ship_col] = "S"
+generate_ships(inv_board, board)
 
 
 print("\n             * Let's play Battleship! *")
 print_board(board)
 
 turn = 0
-for turn in range(4):
+for turn in range(max_turns):
     print("           =========== Turn: %s =========== \n" % str(turn + 1))
 
     while True:
@@ -58,7 +63,7 @@ for turn in range(4):
         print("You missed my battleship!")
         board[guess_row][guess_col] = "X"
 
-        if turn == 3:
+        if turn == (max_turns - 1):
             print("Game Over")
     print_board(board)
 
