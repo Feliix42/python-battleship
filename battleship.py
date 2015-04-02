@@ -21,12 +21,17 @@ def random_col(board):
     return randint(0, len(board[0]) - 1)
 
 max_turns = 15      # number of turns
+ships = 5       # number of ships to be generated
+hits = 0
 
-def generate_ships(board1, board2):
-    ships = 5
-    ship_row = random_row(board)
-    ship_col = random_col(board)
-    inv_board[ship_row][ship_col] = "S"
+def generate_ships(board1, board2, ships):
+    i = 0
+    while i < ships:
+        ship_row = random_row(board2)
+        ship_col = random_col(board2)
+        if board1[ship_row][ship_col] != "S":
+            board1[ship_row][ship_col] = "S"
+            i += 1
 
 # initialize boards
 board = []
@@ -36,10 +41,11 @@ for x in range(5):
     board.append(["O"] * 5)
     inv_board.append([" "] * 5)
 
-generate_ships(inv_board, board)
+generate_ships(inv_board, board, ships)
 
 
 print("\n             * Let's play Battleship! *")
+print("  You have " + str(max_turns) + " turns to sink my fleet consisting of " + str(ships) + " ships. Good luck!")
 print_board(board)
 
 turn = 0
@@ -58,7 +64,10 @@ for turn in range(max_turns):
 
     if inv_board[guess_row][guess_col] == "S":
         print("Congratulations! You sunk my battleship!")
-        break
+        board[guess_row][guess_col] = "H"
+        hits += 1
+        if hits == ships:
+            break
     else:
         print("You missed my battleship!")
         board[guess_row][guess_col] = "X"
