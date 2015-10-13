@@ -1,5 +1,5 @@
 #Welcome aboard my Battleship!
 
-In this repo I mess around while learning the language "python". Inspired by Codecademy I will code a "Battleship!"-game and try to improve it as my skill (hopefully) grows. :see_no_evil:
+This repo is simply a mess of code I wrote when I started to learn *Python*. Please don't look too close at the code, I may clean this mess up when I have the time. :see_no_evil:
 
-Feel free to point out issues or improvements, if you stumble upon some!
+Feel free to point out issues or improvements!
